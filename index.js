@@ -250,7 +250,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_267 = function() {
+(lib.CachedBmp_302 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(27);
 }).prototype = p = new cjs.Sprite();
@@ -495,7 +495,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_266 = function() {
+(lib.CachedBmp_301 = function() {
 	this.initialize(ss["index_atlas_2"]);
 	this.gotoAndStop(3);
 }).prototype = p = new cjs.Sprite();
@@ -1062,7 +1062,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_265 = function() {
+(lib.CachedBmp_300 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(92);
 }).prototype = p = new cjs.Sprite();
@@ -1076,7 +1076,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_264 = function() {
+(lib.CachedBmp_299 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(94);
 }).prototype = p = new cjs.Sprite();
@@ -1090,7 +1090,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_263 = function() {
+(lib.CachedBmp_298 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(96);
 }).prototype = p = new cjs.Sprite();
@@ -2722,7 +2722,7 @@ if (reversed == null) { reversed = false; }
 	cjs.MovieClip.apply(this,[props]);
 
 	// Layer_1
-	this.instance = new lib.CachedBmp_267();
+	this.instance = new lib.CachedBmp_302();
 	this.instance.setTransform(2.2,6.25,0.5,0.5);
 
 	this.instance_1 = new lib.CachedBmp_207();
@@ -2780,7 +2780,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_174();
 	this.instance.setTransform(84.05,0,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_266();
+	this.instance_1 = new lib.CachedBmp_301();
 	this.instance_1.setTransform(0,3,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -7485,7 +7485,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_92();
 	this.instance.setTransform(14.2,0,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_265();
+	this.instance_1 = new lib.CachedBmp_300();
 	this.instance_1.setTransform(0,0.65,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -7511,7 +7511,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_90();
 	this.instance.setTransform(14.2,0,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_264();
+	this.instance_1 = new lib.CachedBmp_299();
 	this.instance_1.setTransform(0,0.65,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -7559,7 +7559,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_88();
 	this.instance.setTransform(14.2,0,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_263();
+	this.instance_1 = new lib.CachedBmp_298();
 	this.instance_1.setTransform(0,0.65,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -25724,77 +25724,94 @@ if (reversed == null) { reversed = false; }
 		this.stop();
 		
 		var gameStage = this;
-		
 		changeSound = true;
 		
-		gameStage.animation_movieclip.visible = true
+		gameStage.animation_movieclip.visible = true;
 		gameStage.animation_movieclip.gotoAndPlay("frame15");
 		
 		gameStage.robotAction.visible = false;
 		
-		currentSound = "15"
+		currentSound = "15";
 		PlaySounds();
 		
-		showText([gameStage.text16_en, gameStage.text16_ar])
+		showText([gameStage.text16_en, gameStage.text16_ar]);
 		
-		// Initialize overlay on frame entry
 		gameStage.black_overlay.visible = true;
 		
-		document.addEventListener('keydown', (event) => {
-		    const titleInputField = document.getElementById('titleInput');
-			titleInputField.style.color = 'black';
-			titleInputField.style.fontSize = '32px';
-		       titleInputField.addEventListener('touchstart', function () {
-		    setTimeout(function () {
-		        titleInputField.focus();
-		    }, 0);
-		});
-		    // Hide overlay when typing starts
-		    if (gameStage.black_overlay.visible && titleInputField.value.length === 0) {
-		        gameStage.black_overlay.visible = false;
-			
-		    }
+		// ✅ Create and append the input field dynamically
+		let titleInputField = document.createElement('input');
+		titleInputField.id = "titleInput";
+		titleInputField.type = "text";
+		titleInputField.style.position = 'absolute';
+		titleInputField.style.zIndex = '1000';
+		titleInputField.style.padding = '10px';
+		titleInputField.style.border = '1px solid black';
+		titleInputField.style.background = 'white';
+		titleInputField.style.color = 'black';
 		
+		document.body.appendChild(titleInputField);
+		
+		// OPTIONAL: Allow clicks to reach input (disable pointer blocking from canvas)
+		document.querySelector("canvas").style.pointerEvents = "none";
+		
+		// ✅ Detect mobile keyboard open using visualViewport
+		if (window.visualViewport) {
+		    let previousHeight = window.visualViewport.height;
+		
+		    window.visualViewport.addEventListener('resize', () => {
+		        let currentHeight = window.visualViewport.height;
+		
+		        if (currentHeight < previousHeight) {
+		            // Keyboard probably opened
+		            console.log("🔹 Keyboard opened");
+		            gameStage.black_overlay.visible = false;
+		        } else if (currentHeight > previousHeight) {
+		            // Keyboard probably closed
+		            console.log("🔸 Keyboard closed");
+		        }
+		
+		        previousHeight = currentHeight;
+		    });
+		}
+		
+		// ✅ Key press detection
+		document.addEventListener('keydown', (event) => {
 		    if (event.keyCode === 13) {
-				// Create a hidden input to focus on
-				var tempInput = document.createElement('input');
-				tempInput.style.position = 'absolute';
-				tempInput.style.opacity = '0';
-				document.body.appendChild(tempInput);
-				tempInput.focus();
-				tempInput.blur();
-				document.body.removeChild(tempInput);
-				
+		        // Create a hidden input to trick soft keyboard to close
+		        var tempInput = document.createElement('input');
+		        tempInput.style.position = 'absolute';
+		        tempInput.style.opacity = '0';
+		        document.body.appendChild(tempInput);
+		        tempInput.focus();
+		        tempInput.blur();
+		        document.body.removeChild(tempInput);
+		
 		        let titleInputValue = titleInputField.value.trim().toLowerCase();
-		        
+		
 		        if (titleInputValue === "the sphinx") {
-		           
-					gameStage.animation_movieclip.visible = false;
-					gameStage.robotAction.visible = true;
-			        gameStage.robotAction.gotoAndStop(0);
+		            gameStage.animation_movieclip.visible = false;
+		            gameStage.robotAction.visible = true;
+		            gameStage.robotAction.gotoAndStop(0);
 		            gameStage.robotAction.right_p.gotoAndPlay(1);
-					correctAnsHandler(0);
+		            correctAnsHandler(0);
 		            setTimeout(() => {
 		                gameStage.gotoAndStop("q1");
 		            }, 2500);
 		        } else {
-					wrongAnsHandler(0);
-					gameStage.animation_movieclip.visible = false;
-			        gameStage.robotAction.visible = true;
-			        gameStage.robotAction.gotoAndStop(1);
-					gameStage.robotAction.wrong.gotoAndPlay(1);
-					
-					
+		            wrongAnsHandler(0);
+		            gameStage.animation_movieclip.visible = false;
+		            gameStage.robotAction.visible = true;
+		            gameStage.robotAction.gotoAndStop(1);
+		            gameStage.robotAction.wrong.gotoAndPlay(1);
 		        }
 		    }
 		});
 		
-		
-		// translate text
+		// ✅ Translate button handling
 		gameStage.translate_btn.removeAllEventListeners();
-		gameStage.translate_btn.addEventListener('click',translateText.bind(this,textElements ));
-		gameStage.translate_btn.addEventListener('click',PlaySounds.bind(this));
-		gameStage.translate_btn.addEventListener('click',ChangeLangIcon.bind(this));
+		gameStage.translate_btn.addEventListener('click', translateText.bind(this, textElements));
+		gameStage.translate_btn.addEventListener('click', PlaySounds.bind(this));
+		gameStage.translate_btn.addEventListener('click', ChangeLangIcon.bind(this));
 	}
 	this.frame_15 = function() {
 		this.stop();
@@ -27122,31 +27139,31 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/Image_1.png?1747135414910", id:"Image_1"},
-		{src:"images/index_atlas_1.png?1747135414003", id:"index_atlas_1"},
-		{src:"images/index_atlas_2.png?1747135414004", id:"index_atlas_2"},
-		{src:"images/index_atlas_3.png?1747135414004", id:"index_atlas_3"},
-		{src:"images/index_atlas_4.png?1747135414005", id:"index_atlas_4"},
-		{src:"images/index_atlas_5.png?1747135414005", id:"index_atlas_5"},
-		{src:"images/index_atlas_6.png?1747135414005", id:"index_atlas_6"},
-		{src:"images/index_atlas_7.png?1747135414005", id:"index_atlas_7"},
-		{src:"images/index_atlas_8.png?1747135414005", id:"index_atlas_8"},
-		{src:"images/index_atlas_9.png?1747135414005", id:"index_atlas_9"},
-		{src:"images/index_atlas_10.png?1747135414006", id:"index_atlas_10"},
-		{src:"images/index_atlas_11.png?1747135414006", id:"index_atlas_11"},
-		{src:"images/index_atlas_12.png?1747135414006", id:"index_atlas_12"},
-		{src:"images/index_atlas_13.png?1747135414006", id:"index_atlas_13"},
-		{src:"images/index_atlas_14.png?1747135414006", id:"index_atlas_14"},
-		{src:"images/index_atlas_15.png?1747135414006", id:"index_atlas_15"},
-		{src:"images/index_atlas_16.png?1747135414006", id:"index_atlas_16"},
-		{src:"images/index_atlas_17.png?1747135414007", id:"index_atlas_17"},
-		{src:"images/index_atlas_18.png?1747135414007", id:"index_atlas_18"},
-		{src:"images/index_atlas_19.png?1747135414007", id:"index_atlas_19"},
-		{src:"images/index_atlas_20.png?1747135414007", id:"index_atlas_20"},
-		{src:"images/index_atlas_21.png?1747135414007", id:"index_atlas_21"},
-		{src:"components/lib/jquery-3.4.1.min.js?1747135414910", id:"lib/jquery-3.4.1.min.js"},
-		{src:"components/sdk/anwidget.js?1747135414910", id:"sdk/anwidget.js"},
-		{src:"components/ui/src/textinput.js?1747135414910", id:"an.TextInput"}
+		{src:"images/Image_1.png?1747137572008", id:"Image_1"},
+		{src:"images/index_atlas_1.png?1747137571191", id:"index_atlas_1"},
+		{src:"images/index_atlas_2.png?1747137571192", id:"index_atlas_2"},
+		{src:"images/index_atlas_3.png?1747137571192", id:"index_atlas_3"},
+		{src:"images/index_atlas_4.png?1747137571192", id:"index_atlas_4"},
+		{src:"images/index_atlas_5.png?1747137571193", id:"index_atlas_5"},
+		{src:"images/index_atlas_6.png?1747137571193", id:"index_atlas_6"},
+		{src:"images/index_atlas_7.png?1747137571193", id:"index_atlas_7"},
+		{src:"images/index_atlas_8.png?1747137571193", id:"index_atlas_8"},
+		{src:"images/index_atlas_9.png?1747137571193", id:"index_atlas_9"},
+		{src:"images/index_atlas_10.png?1747137571193", id:"index_atlas_10"},
+		{src:"images/index_atlas_11.png?1747137571193", id:"index_atlas_11"},
+		{src:"images/index_atlas_12.png?1747137571193", id:"index_atlas_12"},
+		{src:"images/index_atlas_13.png?1747137571194", id:"index_atlas_13"},
+		{src:"images/index_atlas_14.png?1747137571194", id:"index_atlas_14"},
+		{src:"images/index_atlas_15.png?1747137571194", id:"index_atlas_15"},
+		{src:"images/index_atlas_16.png?1747137571194", id:"index_atlas_16"},
+		{src:"images/index_atlas_17.png?1747137571194", id:"index_atlas_17"},
+		{src:"images/index_atlas_18.png?1747137571194", id:"index_atlas_18"},
+		{src:"images/index_atlas_19.png?1747137571195", id:"index_atlas_19"},
+		{src:"images/index_atlas_20.png?1747137571195", id:"index_atlas_20"},
+		{src:"images/index_atlas_21.png?1747137571195", id:"index_atlas_21"},
+		{src:"components/lib/jquery-3.4.1.min.js?1747137572008", id:"lib/jquery-3.4.1.min.js"},
+		{src:"components/sdk/anwidget.js?1747137572008", id:"sdk/anwidget.js"},
+		{src:"components/ui/src/textinput.js?1747137572008", id:"an.TextInput"}
 	],
 	preloads: []
 };
